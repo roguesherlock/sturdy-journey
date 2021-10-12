@@ -29,6 +29,11 @@ const fetchAPI: fetchAPI = async (
     options
   );
 
+  if (res.status < 200 || res.status > 300) {
+    console.error(JSON.stringify(res));
+    throw new Error("Failed to fetch API");
+  }
+
   const json = await res.json();
   if (json.errors) {
     console.error(json.errors);
@@ -44,7 +49,7 @@ export const getAllProducts = async () => {
 };
 
 export const getProduct = async (id: string) => {
-  const data = await fetchAPI(`product/${id}`, { method: "GET" });
+  const data = await fetchAPI(`products/${id}`, { method: "GET" });
   return data ?? null;
 };
 
