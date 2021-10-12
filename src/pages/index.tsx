@@ -3,11 +3,22 @@ import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { getAllProducts } from "src/lib/api";
 import Layout from "src/components/Layout";
+import AddProductForm from "src/components/AddProductForm";
+import { useRouter } from "next/router";
 
 const Home: NextPage<{ products: Product[] }> = ({ products }) => {
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <Layout>
-      <div className="max-w-screen-sm mx-auto py-12">
+      <div className="max-w-screen-sm mx-auto py-12 space-y-6">
+        <div className="flex items-center justify-end">
+          <AddProductForm onSuccess={refreshData} />
+        </div>
         <ul role="list" className="divide-y divide-gray-200">
           {products.map((product) => (
             <li

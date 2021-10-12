@@ -51,6 +51,14 @@ export const getProduct = async (id: string) => {
   return data ?? null;
 };
 
+export const createProduct = async (values: Dict) => {
+  const data = await fetchAPI(`products`, {
+    method: "POST",
+    data: { product: values },
+  });
+  return data ?? null;
+};
+
 export const createProductReview = async (values: Dict) => {
   const data = await fetchAPI(`reviews`, {
     method: "POST",
