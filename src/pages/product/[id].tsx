@@ -1,18 +1,24 @@
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
-import Link from "next/link";
 import { getProduct } from "src/lib/api";
 import Layout from "src/components/Layout";
 import { StarIcon } from "@heroicons/react/solid";
 import { classNames } from "src/lib/utils";
 import Review from "src/components/Review";
-import Button from "src/components/Button";
+import AddReviewForm from "src/components/AddReviewForm";
+import { useRouter } from "next/router";
 
 const Home: NextPage<{ product: Product }> = ({ product }) => {
   const averageRating = Number(
     product.reviews!.reduce((acc, cur) => acc + cur.rating, 0) /
       product.reviews!.length
   ).toPrecision(2);
+
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <Layout>
       <div className="max-w-screen-sm mx-auto py-12">
@@ -44,7 +50,7 @@ const Home: NextPage<{ product: Product }> = ({ product }) => {
               </div>
             </div>
             <div>
-              <Button label="Add review" />
+              <AddReviewForm product={product} onSuccess={refreshData} />
             </div>
           </div>
         </div>

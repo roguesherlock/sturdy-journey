@@ -1,0 +1,42 @@
+/* Ratings widget */
+.rate {
+  display: inline-block;
+  border: 0;
+  color: rgba(229, 231, 235, 1);
+}
+/* Hide radio */
+.rate > input {
+  display: none;
+}
+/* Order correctly by floating highest to the right */
+.rate > label {
+  float: right;
+}
+/* The star of the show */
+.rate > label:before {
+  display: inline-block;
+  font-size: 1.6rem;
+  padding: 0.3rem 0.2rem;
+  margin: 0;
+  cursor: pointer;
+  font-family: "FontAwesome";
+  content: "\f005"; /* full star */
+}
+/* Half star trick */
+.rate .half:before {
+  content: "\f089"; /* half star no outline */
+  position: absolute;
+  padding-right: 0;
+}
+/* Click + hover color */
+.rate input:checked ~ label, /* color current and previous stars on checked */
+.rate label:hover, .rate label:hover ~ label {
+  color: rgba(251, 191, 36, 1);
+} /* color previous stars on hover */
+
+/* Hover highlights */
+.rate input:checked + .rate label:hover, .rate input:checked ~ .rate label:hover, /* highlight current and previous stars */
+.rate input:checked ~ .rate label:hover ~ .rate label, /* highlight previous selected stars for new rating */
+.rate label:hover ~ .rate input:checked ~ .rate label /* highlight previous selected stars */ {
+  color: rgba(251, 191, 36, 1);
+}
