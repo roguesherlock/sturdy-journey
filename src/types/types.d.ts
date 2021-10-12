@@ -1,3 +1,5 @@
+declare module "phoenix";
+
 interface Dict {
   [key: string]: any;
 }
