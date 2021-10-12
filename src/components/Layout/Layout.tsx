@@ -1,3 +1,4 @@
+import { HeartIcon } from "@heroicons/react/outline";
 type Props = {
   children?: React.ReactNode;
 };
@@ -13,6 +14,7 @@ export const Layout = ({ children }: Props) => {
         <footer className="mt-auto">
           <div className="max-w-7xl mx-auto overflow-hidden px-4 sm:px-6 lg:px-8 py-4">
             <div className="mt-8 text-xl flex gap-2 items-center justify-center">
+              <HeartIcon className="h-6 w-6 text-blue-500" />
               <p>Gumroad</p>
             </div>
           </div>
