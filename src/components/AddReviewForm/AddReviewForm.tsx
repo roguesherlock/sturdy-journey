@@ -104,15 +104,15 @@ export const AddReviewForm = ({ product }: Props) => {
                 >
                   {(props) => (
                     <>
-                      <div className="mt-2">
-                        <div className="sm:grid sm:gap-4 sm:items-start">
+                      <div className="mt-4 space-y-2">
+                        <div className="sm:grid sm:items-start">
                           <label
-                            htmlFor="description"
-                            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            htmlFor="rating"
+                            className="block text-sm font-medium text-gray-700 sm:mt-px"
                           >
                             Rating
                           </label>
-                          <div className="mt-1 sm:mt-0 sm:col-span-2">
+                          <div className="mt-1 sm:col-span-2">
                             <Rating
                               name="rating"
                               onChange={props.handleChange}
@@ -126,14 +126,14 @@ export const AddReviewForm = ({ product }: Props) => {
                             </p>
                           )}
                         </div>
-                        <div className="sm:grid sm:gap-4 sm:items-start sm:pt-2">
+                        <div className="sm:grid sm:items-start">
                           <label
                             htmlFor="description"
-                            className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                            className="block text-sm font-medium text-gray-700 sm:mt-px"
                           >
-                            About
+                            Description
                           </label>
-                          <div className="mt-1 sm:mt-0 sm:col-span-2">
+                          <div className="mt-1 sm:col-span-2">
                             <textarea
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
