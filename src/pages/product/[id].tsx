@@ -4,20 +4,14 @@ import { getProduct } from "src/lib/api";
 import Layout from "src/components/Layout";
 import { StarIcon } from "@heroicons/react/solid";
 import { classNames } from "src/lib/utils";
-import Review from "src/components/Review";
-import AddReviewForm from "src/components/AddReviewForm";
-import { useRouter } from "next/router";
+import AddReviewForm from "src/components/AddReviewForm/AddReviewForm";
+import Reviews from "src/components/Reviews";
 
 const Home: NextPage<{ product: Product }> = ({ product }) => {
   const averageRating = Number(
     product.reviews!.reduce((acc, cur) => acc + cur.rating, 0) /
       product.reviews!.length
   ).toPrecision(2);
-
-  const router = useRouter();
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
 
   return (
     <Layout>
@@ -50,20 +44,13 @@ const Home: NextPage<{ product: Product }> = ({ product }) => {
               </div>
             </div>
             <div>
-              <AddReviewForm product={product} onSuccess={refreshData} />
+              <AddReviewForm product={product} />
             </div>
           </div>
         </div>
         <div className="border border-t border-gray-200 mt-8"></div>
         <div className="mt-8">
-          <div className="px-4 py-5 sm:p-0">
-            <h1 className="text-3xl font-bold text-gray-900">Reviews</h1>
-            <dl className="space-y-4 mt-6">
-              {product.reviews!.map((review) => (
-                <Review key={review.id} review={review} />
-              ))}
-            </dl>
-          </div>
+          <Reviews product={product} />
         </div>
       </div>
     </Layout>

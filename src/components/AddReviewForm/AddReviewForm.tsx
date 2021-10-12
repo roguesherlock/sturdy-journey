@@ -1,17 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import Button from "./Button";
+import Button from "../Button";
 import { Formik, FormikConfig } from "formik";
 import * as Yup from "yup";
-import Rating from "./Rating";
+import Rating from "../Rating";
 import { createProductReview } from "src/lib/api";
 import { toast } from "react-toastify";
 
 interface Props {
   product: Product;
-  onSuccess: () => void;
 }
-export const AddReviewForm = ({ product, onSuccess }: Props) => {
+export const AddReviewForm = ({ product }: Props) => {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -43,7 +42,6 @@ export const AddReviewForm = ({ product, onSuccess }: Props) => {
         product_id: product.id,
       });
       closeModal();
-      onSuccess();
       toast.success("Review created successfully");
     } catch (e) {
       console.error(e);

@@ -4,7 +4,7 @@ type Props = {
   review: Review;
 };
 
-export const Layout = ({ review }: Props) => {
+export const Review = ({ review }: Props) => {
   return (
     <>
       <div className="flex items-center gap-5">
@@ -37,4 +37,4 @@ export const Layout = ({ review }: Props) => {
   );
 };
 
-export default Layout;
+export default Review;
