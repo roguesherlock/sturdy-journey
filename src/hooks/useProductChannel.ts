@@ -6,7 +6,7 @@ export const useProductChannel = (
   { onUpdate }: { onUpdate: (review: Review, reviews: Review[]) => void }
 ) => {
   const [reviews, setReviews] = useState<Review[]>([]);
-  const { socket } = useSocket(`//localhost:4000/socket`); // Optional, see Provider
+  const { socket } = useSocket(process.env.NEXT_PUBLIC_SOCKET_URL); // Optional, see Provider
   const { handleChannelEvent } = useChannel(`product:${productId}`, {
     socket: socket,
     onJoin: (params: Dict) => {

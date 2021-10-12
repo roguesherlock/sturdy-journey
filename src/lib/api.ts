@@ -1,5 +1,3 @@
-import { setHttpAgentOptions } from "next/dist/server/config";
-
 type fetchAPI = (
   r: string,
   {
