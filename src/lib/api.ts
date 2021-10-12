@@ -19,9 +19,7 @@ const fetchAPI: fetchAPI = async (
     },
   };
   if (method !== "GET") {
-    options.body = JSON.stringify({
-      data,
-    });
+    options.body = JSON.stringify(data);
   }
 
   const res = await fetch(
@@ -50,6 +48,14 @@ export const getAllProducts = async () => {
 
 export const getProduct = async (id: string) => {
   const data = await fetchAPI(`products/${id}`, { method: "GET" });
+  return data ?? null;
+};
+
+export const createProductReview = async (values: Dict) => {
+  const data = await fetchAPI(`reviews`, {
+    method: "POST",
+    data: { review: values },
+  });
   return data ?? null;
 };
 
