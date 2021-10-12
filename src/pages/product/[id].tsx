@@ -6,12 +6,26 @@ import { StarIcon } from "@heroicons/react/solid";
 import { classNames } from "src/lib/utils";
 import AddReviewForm from "src/components/AddReviewForm/AddReviewForm";
 import Reviews from "src/components/Reviews";
+import { useEffect, useState } from "react";
 
 const Home: NextPage<{ product: Product }> = ({ product }) => {
-  const averageRating = Number(
-    product.reviews!.reduce((acc, cur) => acc + cur.rating, 0) /
-      product.reviews!.length
-  ).toPrecision(2);
+  const [averageRating, setAverateRating] = useState<number>(0);
+
+  const getRating = (reviews: Review[]) => {
+    const rating = Number(
+      reviews!.reduce((acc, cur) => acc + cur.rating, 0) / reviews!.length
+    );
+    return Number.isNaN(rating) ? 0 : rating;
+  };
+
+  useEffect(() => {
+    setAverateRating(getRating(product.reviews!));
+  }, [setAverateRating, product.reviews]);
+
+  const onNewReview = (_review: Review, reviews: Review[]) => {
+    console.log("onNewReview", _review, reviews);
+    setAverateRating(getRating(reviews!));
+  };
 
   return (
     <Layout>
@@ -25,7 +39,7 @@ const Home: NextPage<{ product: Product }> = ({ product }) => {
               <h2 className="sr-only">Reviews</h2>
               <div className="flex gap-2 items-center">
                 <p className="text-gray-900 font-medium text-3xl">
-                  {averageRating}
+                  {averageRating.toPrecision(2)}
                   <span className="sr-only"> out of 5 stars</span>
                 </p>
                 <div className="flex items-center">
@@ -33,7 +47,7 @@ const Home: NextPage<{ product: Product }> = ({ product }) => {
                     <StarIcon
                       key={i}
                       className={classNames(
-                        i >= Number(averageRating)
+                        i >= Math.ceil(Number(averageRating))
                           ? "text-gray-200"
                           : "text-yellow-400",
                         " h-8 w-8"
@@ -50,7 +64,7 @@ const Home: NextPage<{ product: Product }> = ({ product }) => {
         </div>
         <div className="border border-t border-gray-200 mt-8"></div>
         <div className="mt-8">
-          <Reviews product={product} />
+          <Reviews product={product} onNewReview={onNewReview} />
         </div>
       </div>
     </Layout>
