@@ -187,7 +187,7 @@ export const AddProductForm = ({ onSuccess }: Props) => {
                       </div>
                       <div className="mt-6">
                         <Button
-                          label="Submit review"
+                          label="Add product"
                           onClick={props.submitForm}
                         />
                       </div>
